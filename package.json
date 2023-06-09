@@ -1,0 +1,103 @@
+{
+  "name": "galacean-shader",
+  "description": "Galacean Shader Language Plugin",
+  "author": "Galacen",
+  "license": "MIT",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sway007/vscode-galacean-shader.git"
+  },
+  "publisher": "Sway007",
+  "categories": [],
+  "keywords": [
+    "Galacean",
+    "Shader"
+  ],
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "activationEvents": [],
+  "main": "./client/out/extension",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Galacean",
+      "properties": {
+        "gshader.tplUri": {
+          "type": "string",
+          "description": "Specify the file path of shader template"
+        },
+        "languageServerExample.trace.server": {
+          "scope": "window",
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces the communication between VS Code and the language server."
+        }
+      }
+    },
+    "languages": [
+      {
+        "id": "gshader",
+        "extensions": [
+          ".gshader"
+        ],
+        "aliases": [
+          "Galacean Shader",
+          "gshader"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./icons/logo-dark.png",
+          "dark": "./icons/logo-light.png"
+        }
+      }
+    ],
+    "commands": [
+      {
+        "command": "gshader.template",
+        "title": "New Shader",
+        "category": "Galacean"
+      },
+      {
+        "command": "gshader.showCode",
+        "title": "Show Compiled GLSL Code",
+        "category": "Galacean",
+        "icon": "$(symbol-reference)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "when": "resourceLangId === gshader",
+          "command": "gshader.showCode",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -b",
+    "watch": "tsc -b -w",
+    "lint": "eslint ./client/src ./server/src --ext .ts,.tsx",
+    "postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
+    "test": "sh ./scripts/e2e.sh",
+    "release": "standard-version && git push origin --tags"
+  },
+  "devDependencies": {
+    "@types/mocha": "^9.1.0",
+    "@types/node": "^16.18.34",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "eslint": "^8.35.0",
+    "mocha": "^9.2.1",
+    "standard-version": "^9.5.0",
+    "typescript": "^5.1.3"
+  }
+}
