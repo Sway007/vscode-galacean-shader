@@ -9,6 +9,7 @@
     "url": "https://github.com/Sway007/vscode-galacean-shader.git"
   },
   "publisher": "Sway007",
+  "icon": "./icons/logo-dark.png",
   "categories": [],
   "keywords": [
     "Galacean",
