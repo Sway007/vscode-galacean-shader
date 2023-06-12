@@ -14,6 +14,8 @@ import {
 } from 'vscode-languageclient/node';
 import { createTemplate, showCode } from './commands';
 import { previewCode } from './previewCode';
+import { ProjectDataProvider } from './DataExplorer';
+import { Login } from './commands/login';
 
 let client: LanguageClient;
 
@@ -62,6 +64,12 @@ export function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(createTemplate());
   context.subscriptions.push(showCode(client));
+  context.subscriptions.push(Login());
+
+  vscode.window.registerTreeDataProvider(
+    'g-project-list',
+    new ProjectDataProvider()
+  );
 }
 
 export function deactivate(): Thenable<void> | undefined {
