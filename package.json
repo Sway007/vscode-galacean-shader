@@ -70,6 +70,11 @@
         "title": "Show Compiled GLSL Code",
         "category": "Galacean",
         "icon": "$(symbol-reference)"
+      },
+      {
+        "command": "galacean.login",
+        "title": "Login",
+        "category": "Galacean"
       }
     ],
     "menus": {
@@ -80,7 +85,34 @@
           "group": "navigation"
         }
       ]
-    }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "galacean-explorer",
+          "title": "Galacean",
+          "icon": "icons/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "galacean-explorer": [
+        {
+          "id": "g-project-list",
+          "name": "projects"
+        },
+        {
+          "id": "g-asset-list",
+          "name": "assets"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "g-project-list",
+        "contents": "In order to fetch your galacen project data, you need to login first.\n[Login In](command:galacean.login)\nTo learn more about galacean [read our docs](https://galacean.antgroup.com/)"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
